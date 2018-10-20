@@ -30,6 +30,7 @@ export class ProductServiceImp implements ProductService {
     }
 
     public async filterPreferences(visited: Array<any>): Promise<any> {
+        console.log(visited);
         return await this.productRepository.findProductNotIn(visited);
     }
 
