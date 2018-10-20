@@ -22,4 +22,8 @@ export class ProductRepository extends GenericRepositoryImp<ProductModel> {
         return await Product.find({ product_id: { '$nin': ids } }).limit(10);
     }
 
+    public async findCorridorsIdByIds(ids: Array<number>): Promise<any> {
+        return await Product.find({ product_id: { '$in': ids } }, 'product_id corridors.id -_id');
+    }
+
 }

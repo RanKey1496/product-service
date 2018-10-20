@@ -53,6 +53,18 @@ export class ProductController implements RegistrableController {
                         return next(error);
                     }
                 });
+
+        app.route('/product/corridor/ids')
+            .post(authenticate,
+                async (req: Request, res: Response, next: NextFunction) => {
+                    try {
+                        console.log(req.body.ids);
+                        const result = await this.productService.getCorridorsIdByIds(req.body.ids);
+                        return dataResponse(res, result);
+                    } catch (error) {
+                        return next(error);
+                    }
+                });
     }
 
 }
