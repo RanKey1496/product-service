@@ -15,7 +15,11 @@ export class ProductRepository extends GenericRepositoryImp<ProductModel> {
 
     public async findByCorridorId(id: number): Promise<ProductModel[]> {
         // tslint:disable-next-line:no-null-keyword
-        return await Product.find({ 'corridors.id': id }, '-_id');
+        return await Product.find({ 'corridors.id': id }, '-_id').limit(10);
+    }
+
+    public async findBySubCorridor(id: number): Promise<ProductModel[]> {
+        return await Product.find({ 'corridors.id': id }, '-_id').limit(10);
     }
 
     public async findProductNotIn(ids: Array<any>): Promise<any> {
