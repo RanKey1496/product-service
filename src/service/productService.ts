@@ -6,6 +6,7 @@ import { ProductModel } from '../entity/product';
 export interface ProductService {
     getById(id: number): Promise<ProductModel>;
     getByCorridorId(id: number): Promise<ProductModel[]>;
+    getBySubCorridorId(id: number): Promise<ProductModel[]>;
     filterPreferences(visited: Array<any>): Promise<ProductModel[]>;
     getCorridorsIdByIds(ids: Array<number>): Promise<Array<string>>;
 }
@@ -24,7 +25,12 @@ export class ProductServiceImp implements ProductService {
         return await this.productRepository.findByCorridorId(id);
     }
 
+    public async getBySubCorridorId(id: number): Promise<ProductModel[]> {
+        return await this.productRepository.findBySubCorridor(id);
+    }
+
     public async filterPreferences(visited: Array<any>): Promise<any> {
+        console.log(visited);
         return await this.productRepository.findProductNotIn(visited);
     }
 

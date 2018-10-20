@@ -42,6 +42,18 @@ export class ProductController implements RegistrableController {
                 }
             });
 
+        app.route('/product/subcorridor/:id')
+            .get(authenticate,
+                async (req: Request, res: Response, next: NextFunction) => {
+                try {
+                    const id = req.params.id;
+                    const result = await this.productService.getBySubCorridorId(id);
+                    return dataResponse(res, result);
+                } catch (error) {
+                    return next(error);
+                }
+            });
+
         app.route('/product/preference/recommended')
             .get(authenticate,
                 async (req: Request, res: Response, next: NextFunction) => {
